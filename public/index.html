@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setup</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+    <script>
+        function validate(e) {
+            if (e.target.value.length > e.target.maxLength) e.target.value = e.target.value.slice(0, e.target.maxLength);
+        }
+    </script>
+</head>
+<body>
+    <!--setup-->
+    <div id="setup" class="container">
+        <h3>setup</h3>
+        <p>I will work for <input id="work" required type="number" min="1" maxlength="3" value="25" placeholder="25"> minutes then take a <input id="shortBreak" required type="number" min="1" maxlength="2" value="5" placeholder="5"> minute short break.<br>
+        I will repeat that <input id="sessions" required type="number" min="1" maxlength="2" value="4" placeholder="4"> times then take a <input id="longBreak" required type="number" min="0" maxlength="3" value="25" placeholder="25"> minute long break and repeat.
+        </p>
+        <button id="start">start</button>
+        <span id="errorBox">invalid input</span>
+    </div>
+    <!--running-->
+    <div id="running" class="container">
+        <div id="show">
+            <span id="time">25:00</span>
+            <span id="sessionType">work</span>
+        </div>
+        <div id="buttons">
+            <button id="pause">pause</button>
+            <button id="skip">skip</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
