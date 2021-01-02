@@ -135,6 +135,10 @@ body{
     color: #263963;
     opacity: 0.7;
 }
+#running button:active{
+    font-weight: lighter;
+    box-shadow: 0 0 5px 4px #E5E5E5;
+}
 #running #skip{
     margin-left: 10px;
 }
