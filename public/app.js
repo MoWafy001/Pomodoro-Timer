@@ -2,6 +2,9 @@ var work, shortBreak, sessions, sessionCounter=1, longBreak;
 var time, timer;
 var working = true;
 var errorBox = document.querySelector("#errorBox");
+var s = false
+var ended = false
+var pausing = false
 
 function setTime(seconds) {
     let s = ""+(seconds-Math.floor(seconds/60)*60);
@@ -20,33 +23,50 @@ function setTime(seconds) {
     }
     return m+":"+s;
 }
+update = ()=>{
+    document.querySelector("#pause").innerHTML = (pausing)?"resume":"pause";
+    document.querySelector("#skip").innerHTML = (s)?"next":"skip";
+}
 clock = ()=>{
     document.querySelector("#time").textContent = setTime(time);
     if(time>0) {
-        time-=1;   
+        time-=(!pausing)?1:0;   
     }else{
-        if (working) {
-            working=false
-            if (sessionCounter<sessions || sessions == 1) {
-                if (sessions!=1 && longBreak!=0) {
-                    sessionCounter+=1   
+        if (!s && !ended) {
+            s = true
+            ended = true
+            update()
+            document.querySelector("audio").play()
+        }
+        if (!s && ended) {
+            document.querySelector("audio").pause()
+            document.querySelector("audio").currentTime = 0
+            ended = false
+        }
+        if(!s){
+            if (working) {
+                working=false
+                if (sessionCounter<sessions || sessions == 1) {
+                    if (sessions!=1 && longBreak!=0) {
+                        sessionCounter+=1   
+                    }
+                    time = shortBreak
+                    document.querySelector("#sessionType").textContent="short break";
+                }else{
+                    document.querySelector("#sessionType").textContent="long break";
+                    sessionCounter=1
+                    time = longBreak
                 }
-                time = shortBreak
-                document.querySelector("#sessionType").textContent="short break";
             }else{
-                document.querySelector("#sessionType").textContent="long break";
-                sessionCounter=1
-                time = longBreak
+                if (sessions!=1 && longBreak!=0) {
+                    document.querySelector("#sessionType").innerHTML=`work ${sessionCounter}/${sessions}`;
+                }else{
+                    document.querySelector("#sessionType").innerHTML=`work`;
+                }
+                
+                working=true
+                time = work
             }
-        }else{
-            if (sessions!=1 && longBreak!=0) {
-                document.querySelector("#sessionType").innerHTML=`work ${sessionCounter}/${sessions}`;
-            }else{
-                document.querySelector("#sessionType").innerHTML=`work`;
-            }
-            
-            working=true
-            time = work
         }
     }
 }
