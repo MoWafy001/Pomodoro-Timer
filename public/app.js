@@ -7,7 +7,7 @@ var ended = false
 var pausing = false
 
 function setTime(seconds) {
-    let s = ""+(seconds-Math.floor(seconds/60)*60);
+    let s = ""+Math.floor((seconds-Math.floor(seconds/60)*60));
     if (s.length<2) {
         s=""+"0"+s;
     }
@@ -30,7 +30,7 @@ update = ()=>{
 clock = ()=>{
     document.querySelector("#time").textContent = setTime(time);
     if(time>0) {
-        time-=(!pausing)?1:0;   
+        time-=(!pausing)?0.01:0;   
     }else{
         if (!s && !ended) {
             s = true
@@ -71,7 +71,7 @@ clock = ()=>{
     }
 }
 function run() {
-    timer = setInterval(clock,1000)
+    timer = setInterval(clock,10)
 }
 
 function start() {
