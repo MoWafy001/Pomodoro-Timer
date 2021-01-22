@@ -1,0 +1,10 @@
+@media (pointer:none), (pointer:coarse) {
+    .container{
+        width:70%;
+        min-width: none;
+        font-size: 3em;
+    }
+    #setup p input{
+        font-size: 2rem;
+    }
+}
