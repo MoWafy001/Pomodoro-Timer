@@ -5,6 +5,7 @@ var errorBox = document.querySelector("#errorBox");
 var s = false
 var ended = false
 var pausing = false
+var tenMil = true
 
 function setTime(seconds) {
     let s = ""+Math.floor((seconds-Math.floor(seconds/60)*60));
@@ -28,9 +29,12 @@ update = ()=>{
     document.querySelector("#skip").innerHTML = (s)?"next":"skip";
 }
 clock = ()=>{
-    document.querySelector("#time").textContent = setTime(time);
+    timeText = setTime(time)
+    document.title = timeText
+    document.querySelector("#time").textContent = timeText;
     if(time>0) {
-        time-=(!pausing)?0.01:0;   
+        time-=(!pausing)?((!tenMil)?1:0.01):0;   
+        time = (time<0)?0:time;
     }else{
         if (!s && !ended) {
             s = true
@@ -68,6 +72,16 @@ clock = ()=>{
                 time = work
             }
         }
+    }
+    if (document.hidden && tenMil) {
+        clearInterval(timer)
+        tenMil = false
+        timer = setInterval(clock,1000)
+    }
+    if (!document.hidden && !tenMil) {
+        clearInterval(timer)
+        tenMil = true
+        timer = setInterval(clock,10)
     }
 }
 function run() {
