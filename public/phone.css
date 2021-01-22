@@ -7,4 +7,14 @@
     #setup p input{
         font-size: 2rem;
     }
+    #running div{
+        margin: 10px;
+    }
+    #running #skip{
+        margin-left: 20px;
+    }
+    #running button{
+        font-size: 1em;
+        padding: 20px 30px;
+    }
 }
