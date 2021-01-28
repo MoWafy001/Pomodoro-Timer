@@ -5,7 +5,10 @@ var errorBox = document.querySelector("#errorBox");
 var s = false
 var ended = false
 var pausing = false
-var tenMil = true
+var po = false
+var hidS = true
+var dateSet = false;
+var d, st;
 
 function setTime(seconds) {
     let s = ""+Math.floor((seconds-Math.floor(seconds/60)*60));
@@ -27,15 +30,28 @@ function setTime(seconds) {
 update = ()=>{
     document.querySelector("#pause").innerHTML = (pausing)?"resume":"pause";
     document.querySelector("#skip").innerHTML = (s)?"next":"skip";
+    document.querySelector("audio").pause()
+    document.querySelector("audio").currentTime = 0
 }
 clock = ()=>{
+    if (!dateSet & !pausing && !s) {
+        dateSet=true
+        console.log(1);
+        d = new Date();
+        st = time
+    }
     timeText = setTime(time)
-    document.title = timeText
+    document.title = timeText;
     document.querySelector("#time").textContent = timeText;
     if(time>0) {
-        time-=(!pausing)?((!tenMil)?1:0.01):0;   
+        if (!pausing) {
+            time = st-((new Date())-d)/1000;
+        }else{
+            dateSet = false
+        }
         time = (time<0)?0:time;
     }else{
+        dateSet = false
         if (!s && !ended) {
             s = true
             ended = true
@@ -43,8 +59,6 @@ clock = ()=>{
             document.querySelector("audio").play()
         }
         if (!s && ended) {
-            document.querySelector("audio").pause()
-            document.querySelector("audio").currentTime = 0
             ended = false
         }
         if(!s){
@@ -73,14 +87,14 @@ clock = ()=>{
             }
         }
     }
-    if (document.hidden && tenMil) {
-        clearInterval(timer)
-        tenMil = false
-        timer = setInterval(clock,1000)
+    if (document.hidden && hidS) {
+        hidS = false
+        clearInterval(timer);
+        timer = setInterval(clock,100)
     }
-    if (!document.hidden && !tenMil) {
-        clearInterval(timer)
-        tenMil = true
+    if (!document.hidden && !hidS) {
+        hidS = true
+        clearInterval(timer);
         timer = setInterval(clock,10)
     }
 }
