@@ -1,2 +1,2 @@
-# Timer
-just a timer
+# Pomodoro Timer
+A simple pomodoro timer.
