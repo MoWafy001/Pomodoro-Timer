@@ -17,8 +17,19 @@
     <!--setup-->
     <div id="setup" class="container">
         <h3>setup</h3>
-        <p>I will work for <input id="work" required type="number" min="1" maxlength="3" value="25" placeholder="25"> minutes then take a <input id="shortBreak" required type="number" min="1" maxlength="2" value="5" placeholder="5"> minute short break.<br>
-        I will repeat that <input id="sessions" required type="number" min="1" maxlength="2" value="4" placeholder="4"> times then take a <input id="longBreak" required type="number" min="0" maxlength="3" value="25" placeholder="25"> minute long break and repeat.
+        <p>
+            I will 
+            <input class="wide" id="work-name" required type="text" maxlength="20" value="work" placeholder="work"> 
+            for 
+            <input id="work" required type="number" min="1" maxlength="3" value="25" placeholder="25"> 
+            minutes then
+            <input class="wide" id="second-name" required type="text" maxlength="20" value="take a short break" placeholder="take a short break"> 
+            for
+            <input id="shortBreak" required type="number" min="1" maxlength="2" value="5" placeholder="5"> 
+            minutes. I will repeat that 
+            <input id="sessions" required type="number" min="1" maxlength="2" value="4" placeholder="4"> 
+            times then take a <input id="longBreak" required type="number" min="0" maxlength="3" value="25" placeholder="25"> 
+            minute long break and repeat.
         </p>
         <button id="start">start</button>
         <span id="errorBox">invalid input</span>

@@ -1,3 +1,11 @@
+:root{
+    --background-color: #111;
+    --board-color: #222;
+    --text-color: #E5E5E5;
+    --secondary-text-color: #111;
+    --highlight-color: #FCA311;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -9,7 +17,7 @@ input[type=number] {
 body{
     margin: 0;
     padding: 0;
-    background: #14213D;
+    background: var(--background-color);
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -21,48 +29,53 @@ body{
     padding: 1em;
     width: 25%;
     min-width: 10cm;
-    color: #E5E5E5;
-    border-radius: 20px;
+    color: var(--text-color);
+    border-radius: 10px;
     font-size: 1.5em;
 }
 #setup{
     transform: translateY(0) scale(1);
-    background: #263963;
+    background: var(--board-color);
     transition: 1s;
 }
 #setup h3{
     margin:0;
     margin-bottom: 0.9em;
-    color: #E5E5E5;
+    color: var(--text-color);
 }
 #setup p{
     text-align: left;
     margin:0.25em 0;
-    line-height: 150%;
+    line-height: 170%;
 }
 #setup p input{
     display: inline;
-    background: #fff2;
-    width: 2em;
+    background: #fff1;
     text-align: center;
-    color:#FCA311;
+    color:var(--highlight-color);
     border: none;
     outline: none;
     padding: 6px 4px;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: bolder;
     transition: 0.25s;
 }
+input.wide {
+    width: 5rem;
+}
+input:not(input.wide){
+    width: 2rem;
+}
 #setup p input:focus{
     padding: 6px 6px;
-    background: #fff4;
+    background: #fff2;
 }
 #setup button{
     display: block;
     margin: 1em auto;
     margin-bottom: 0;
-    background: #FCA311;
-    color: #E5E5E5;
+    background: var(--highlight-color);
+    color: var(--secondary-text-color);
     border-radius: 0;
     border: none;
     outline: none;
@@ -71,7 +84,7 @@ body{
     transition: 0.25s;
 }
 #setup button:hover{
-    background: #cc820c;
+    background: var(--highlight-color);
 }
 #errorBox{
     display: block;
@@ -81,8 +94,8 @@ body{
     margin-top: 10px;
     padding: 10px 0;
     width: 100%;
-    color:#ff0;
-    background: #ca0000;
+    color: var(--secondary-text-color);
+    background: var(--highlight-color);
     text-align: center;
     opacity: 0;
     transition: 1s;
@@ -101,7 +114,7 @@ body{
     margin: 5px;
 }
 #running #show{
-    background: #263963;
+    background: var(--board-color);
     display: flex;
     flex-direction: column; 
 }
@@ -121,23 +134,23 @@ body{
     justify-content: center;
 }
 #running button{
-    background: #263963;
+    background: var(--board-color);
     border: none;
     outline: none;
-    color: #E5E5E5;
+    color: var(--text-color);
     padding: 10px 30px;
     width: 50%;
     font-size: 0.8em;
     transition: 0.2s;
 }
 #running button:hover{
-    background: #E5E5E5;
-    color: #263963;
+    background: var(--text-color);
+    color: var(--board-color);
     opacity: 0.7;
 }
 #running button:active{
     font-weight: lighter;
-    box-shadow: 0 0 5px 4px #E5E5E5;
+    box-shadow: 0 0 5px 4px var(--text-color);
 }
 #running #skip{
     margin-left: 10px;

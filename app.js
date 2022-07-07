@@ -9,6 +9,8 @@ var po = false
 var hidS = true
 var dateSet = false;
 var d, st;
+var work_name;
+var second_name;
 
 function setTime(seconds) {
     let s = ""+Math.floor((seconds-Math.floor(seconds/60)*60));
@@ -36,7 +38,6 @@ update = ()=>{
 clock = ()=>{
     if (!dateSet & !pausing && !s) {
         dateSet=true
-        console.log(1);
         d = new Date();
         st = time
     }
@@ -69,7 +70,7 @@ clock = ()=>{
                         sessionCounter+=1   
                     }
                     time = shortBreak
-                    document.querySelector("#sessionType").textContent="short break";
+                    document.querySelector("#sessionType").textContent= second_name;
                 }else{
                     document.querySelector("#sessionType").textContent="long break";
                     sessionCounter=1
@@ -77,9 +78,9 @@ clock = ()=>{
                 }
             }else{
                 if (sessions!=1 && longBreak!=0) {
-                    document.querySelector("#sessionType").innerHTML=`work ${sessionCounter}/${sessions}`;
+                    document.querySelector("#sessionType").innerHTML=`${work_name} ${sessionCounter}/${sessions}`;
                 }else{
-                    document.querySelector("#sessionType").innerHTML=`work`;
+                    document.querySelector("#sessionType").innerHTML=work_name;
                 }
                 
                 working=true
@@ -116,6 +117,8 @@ function start() {
         shortBreak = document.querySelector("#shortBreak").value * 60;
         sessions = document.querySelector("#sessions").value;
         longBreak = document.querySelector("#longBreak").value * 60;
+        work_name = document.querySelector('#work-name').value;
+        second_name = document.querySelector('#second-name').value;
         document.querySelector("#setup").style.transform = "translateY(-130%) scale(0)";
         setTimeout(()=>{
             document.querySelector("#setup").style.display = "none";
@@ -126,9 +129,9 @@ function start() {
         },1100);
         time = work;
         if (sessions!=1 && longBreak!=0) {
-            document.querySelector("#sessionType").innerHTML=`work ${sessionCounter}/${sessions}`;
+            document.querySelector("#sessionType").innerHTML=`${work_name} ${sessionCounter}/${sessions}`;
         }else{
-            document.querySelector("#sessionType").innerHTML=`work`;
+            document.querySelector("#sessionType").innerHTML=work_name;
         }
         run();
     }else{// If everything isn't ok, display an error message.
@@ -144,3 +147,16 @@ p.addEventListener("keyup",validate,true);
 
 const startBtn = document.querySelector("#start");
 startBtn.addEventListener("click",start)
+
+const resizeBox = (e)=>{
+    inp = e.target || e
+    let l = inp.value.length
+    if(l < 4) l = 4
+    const w = l * 0.7
+    inp.style.width = `${w}rem`
+}
+
+document.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('keydown', resizeBox)
+    resizeBox(inp)
+})
